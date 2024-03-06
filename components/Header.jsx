@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { HomeLogo } from "./HomeLogo";
-import { Wallet } from "./Wallet";
+import { WalletButton } from "./WalletButton";
 
 export function Header(){
     return (
@@ -11,7 +11,7 @@ export function Header(){
                 <li className="underline-animation"><Link href={"/dashboard"}>Selling Dashboard</Link></li>
                 <li className="underline-animation"><Link href={"/about"}>About Us</Link></li>
             </ul>
-            <Wallet></Wallet>
+            <WalletButton></WalletButton>
         </div>
     )
 }
