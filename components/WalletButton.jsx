@@ -6,14 +6,7 @@ import { WalletContext, NO_WALLET } from "./WalletProvider";
 
 
 export function WalletButton(){
-    const { account, setAccount } = useContext(WalletContext)
-
-    const connectWallet = () => {
-        window.ethereum.request({method: "eth_requestAccounts"})
-            .then(accounts => {
-                setAccount(accounts[0])
-        })
-    }
+    const { account, connectWallet } = useContext(WalletContext)
 
     return (
         <button className="py-1 px-3

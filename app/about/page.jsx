@@ -1,5 +1,5 @@
 export default function Page(){
     return (
-        <h1 className="h-full">About Me</h1>
+        <h1>About Me</h1>
     )
 }

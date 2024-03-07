@@ -19,6 +19,13 @@ export function WalletProvider({children}){
         }
     }
 
+    const connectWallet = () => {
+        window.ethereum.request({method: "eth_requestAccounts"})
+            .then(accounts => {
+                setAccount(accounts[0])
+        })
+    }
+
     useEffect(() => {
         if (window.ethereum == null) {
             setAccount(NO_WALLET)
@@ -30,7 +37,7 @@ export function WalletProvider({children}){
     }, [])
 
     return (
-        <WalletContext.Provider value={{account, setAccount}}>
+        <WalletContext.Provider value={{account, connectWallet}}>
             {children}
         </WalletContext.Provider>
     )

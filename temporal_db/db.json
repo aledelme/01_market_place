@@ -1,1 +1,40 @@
-[]
+{
+    "0xf974a1e36ae599dfb40c5206b17ca8d50f9ddaf7": {
+        "name": "Tienda de Miguelito",
+        "products": [
+            {
+                "name": "Zapatillas de correr",
+                "price": 10
+            },
+            {
+                "name": "Camiseta deporte",
+                "price": 12
+            },
+            {
+                "name": "Raqueta",
+                "price": "50"
+            },
+            {
+                "name": "Balón",
+                "price": "5"
+            },
+            {
+                "name": "Abrigo",
+                "price": "23"
+            },
+            {
+                "name": "Chaqueta",
+                "price": "36"
+            }
+        ],
+        "invoices": [
+            {
+                "date": "",
+                "costumer": "",
+                "product_id": 0,
+                "quantity": 1,
+                "total": 10
+            }
+        ]
+    }
+}

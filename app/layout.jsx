@@ -17,7 +17,9 @@ export default function RootLayout({ children }) {
       <body className={"bg-gradient-radial from-cyan-900 to-black flex flex-col h-screen " + inter.className}>
         <WalletProvider>
           <Header></Header>
-          {children}
+          <div className="h-full flex flex-col items-center justify-center">
+            {children}
+          </div>
           <Footer></Footer>
         </WalletProvider>
       </body>
