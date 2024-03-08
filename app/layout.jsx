@@ -14,13 +14,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={"bg-gradient-radial from-cyan-900 to-black flex flex-col h-screen " + inter.className}>
+      <body className={inter.className}>
         <WalletProvider>
-          <Header></Header>
-          <div className="h-full flex flex-col items-center justify-center">
-            {children}
+          <div className={"min-h-screen bg-gradient-radial from-cyan-900 to-black flex flex-col justify-between"}>
+            <Header></Header>
+              <div className="h-full flex flex-col justify-center items-center">
+                {children}
+              </div>
+            <Footer></Footer>
           </div>
-          <Footer></Footer>
         </WalletProvider>
       </body>
     </html>

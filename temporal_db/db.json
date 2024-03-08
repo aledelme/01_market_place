@@ -25,15 +25,26 @@
             {
                 "name": "Chaqueta",
                 "price": "36"
+            },
+            {
+                "name": "Casco",
+                "price": "15"
             }
         ],
         "invoices": [
             {
-                "date": "",
-                "costumer": "",
+                "date": "08/03/2024",
+                "customer": "Pepito",
                 "product_id": 0,
                 "quantity": 1,
                 "total": 10
+            },
+            {
+                "date": "10/03/2024",
+                "customer": "Manuelito",
+                "product_id": 2,
+                "quantity": 2,
+                "total": 75
             }
         ]
     }

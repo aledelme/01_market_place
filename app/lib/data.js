@@ -5,8 +5,15 @@ import fs from 'fs'
 const DB = './temporal_db/db.json'
 
 export async function fetchCompanyData (address){
-    const company = db[address]
-    return company
+    return db[address]
+}
+
+export async function fetchLastInvoices (address){
+    const {products, invoices} = db[address]
+    return invoices
+        .map(i => Object.assign(i, {product: products[i.product_id].name}))
+        .reverse()
+        .slice(undefined, 5)
 }
 
 // export async function registryCompany(address, name){
