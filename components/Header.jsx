@@ -9,7 +9,7 @@ export function Header(){
                 <li><Link href={"/"}><HomeLogo></HomeLogo></Link></li>
                 <li className="underline-animation"><Link href={"/shop"}>Shopping Center</Link></li>
                 <li className="underline-animation"><Link href={"/dashboard"}>Selling Dashboard</Link></li>
-                <li className="underline-animation"><Link href={"/about"}>About Us</Link></li>
+                <li className="underline-animation"><Link href={"/about"}>About</Link></li>
             </ul>
             <WalletButton></WalletButton>
         </div>

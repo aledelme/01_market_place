@@ -47,5 +47,15 @@
                 "total": 75
             }
         ]
+    },
+    "0x431ae1d843f6bbf6961432948f3487dac8d3fe1b": {
+        "name": "Paquito & Company",
+        "products": [
+            {
+                "name": "Lavadora",
+                "price": "200"
+            }
+        ],
+        "invoices": []
     }
 }

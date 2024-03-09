@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
         <WalletProvider>
           <div className={"min-h-screen bg-gradient-radial from-cyan-900 to-black flex flex-col justify-between"}>
             <Header></Header>
-              <div className="h-full flex flex-col justify-center items-center">
+              <div className="grow flex flex-col">
                 {children}
               </div>
             <Footer></Footer>

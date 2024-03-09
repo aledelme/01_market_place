@@ -1,7 +1,7 @@
 import Image from 'next/image' 
 export function HomeLogo(){
     return (
-        <div className='flex gap-2 p-1 border-2 border-gray-400 rounded-full'>
+        <div className='flex gap-2 p-1 border-2 border-gray-400 rounded-full hover:bg-slate-800'>
             <Image src="/logo.png"
                 width={25}
                 height={25}
