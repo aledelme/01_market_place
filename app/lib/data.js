@@ -17,12 +17,18 @@ export async function fetchLastInvoices (address){
         .slice(undefined, 5)
 }
 
-export async function fetchAllProducts (){
+export async function fetchAllProducts (search){
     let products = []
     for (const [, data] of Object.entries(db)) {
       products = products.concat(data.products)
     }
-    return products
+
+    if (search){
+        const regex = new RegExp(search,"i")
+        return products.filter(p => regex.test(p.name))
+    } else {
+        return products
+    }
 }
 
 export async function registryCompany(address, name){
