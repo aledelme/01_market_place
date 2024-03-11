@@ -1,7 +1,8 @@
 'use server'
 import fs from 'fs'
+import path from 'path'
 
-const DB = './app/temporal_db/db.json'
+const DB = path.join(__dirname, '../temporal_db.json')
 
 export async function fetchCompanyData (address){
     const db = getDB()
@@ -46,14 +47,8 @@ export async function uploadProduct(company, name, price){
     fs.writeFileSync(DB, JSON.stringify(db, undefined, 4))
 }
 
-
-
-
 function getDB(){
     if (!fs.existsSync(DB)) {
-        if (!fs.existsSync('./app/temporal_db')){
-            fs.mkdirSync('./app/temporal_db')
-        }
         fs.writeFileSync(DB,'{}')
     }
     const db = JSON.parse(fs.readFileSync(DB))
