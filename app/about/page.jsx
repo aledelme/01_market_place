@@ -28,11 +28,16 @@ export default function Page(){
                         <li><MiniLink href='https://tailwindcss.com'>Tailwind</MiniLink> as style framework.</li>
                         <li><MiniLink href='https://hardhat.org'>Hardhat</MiniLink> as Blockchain development environment.</li>
                         <li><MiniLink href='https://docs.ethers.org'>Ethers.js</MiniLink> as package for Web3 interaction.</li>
-                        <li><MiniLink href='https://www.netlify.com/'>Netlify</MiniLink> as hostage.</li>
                     </ul>
                 </div>
                 <p>
                     You can find the code of this website on this <MiniLink href="https://github.com/aledelme/01_market_place/">GitHub Repository</MiniLink>.
+                </p>
+                <p>
+                    I am temporarily using a PostgreSQL database to store the data. However, the idea is to create a smart contract on the Goerli testnet to store the data and for purchase and sale transactions to be carried out with its own ERC20 token.
+                </p>
+                <p>
+                    As for me, I seek to be part of a multidisciplinary team with which I can learn and at the same time contribute with my personal knowledge of the Blockchain world.
                 </p>
             </div>
         </div>

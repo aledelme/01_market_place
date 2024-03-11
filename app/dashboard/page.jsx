@@ -42,7 +42,7 @@ export default function Page(){
                 <span className="text-4xl m-3">Upss! It's seems you don't have a wallet :(</span>
                 <p className="m-2">Try downloading some of the most popular ones for your browser</p>
                 <div className="flex flex-row items-center gap-5">
-                    <a href="https://metamask.io/" className="rounded-3xl bg-slate-50 p-3">
+                    <a href="https://metamask.io/" className="rounded-3xl bg-slate-50 p-3 hover:scale-105 transition">
                         <Image
                             src="/MetaMask-Logo.svg"
                             width={200}
@@ -51,7 +51,7 @@ export default function Page(){
                             priority={true}
                         />
                     </a>
-                    <a href="https://rabby.io/" className="rounded-3xl bg-indigo-400 p-3">
+                    <a href="https://rabby.io/" className="rounded-3xl bg-indigo-400 p-3 hover:scale-105 transition">
                         <Image
                             src="/logo-white.svg"
                             width={200}
@@ -127,7 +127,7 @@ export default function Page(){
                         date={i.date}
                         customer={i.customer}
                         product={i.product}
-                        quantity={i.quantity}
+                        units={i.units}
                         total={i.total}>    
                     </InvoiceCard>)}
                 </div>

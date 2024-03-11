@@ -39,6 +39,7 @@ export default function Page(){
                     products && products.map((p, index) => {
                         return <ProductCard
                             key={index}
+                            id={p.product_id}
                             name={p.name}
                             price={p.price}
                             buyable={true}

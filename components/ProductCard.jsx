@@ -1,9 +1,13 @@
 'use client'
 
+import { buyProduct } from '@/app/lib/data';
 import { Button, Label, Modal, TextInput } from 'flowbite-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { WalletContext, CONNECT_WALLET, NO_WALLET } from './WalletProvider';
+import Link from 'next/link';
 
-export function ProductCard({name, price, buyable}){
+export function ProductCard({id, name, price, buyable}){
+    const { account, connectWallet } = useContext(WalletContext)
     const [openModal, setOpenModal] = useState(false);
     const [units, setUnits] = useState(1);
     const [validUnits, setValidUnits] = useState(true)
@@ -22,6 +26,7 @@ export function ProductCard({name, price, buyable}){
 
     function formHandler(){
         if (units > 0){
+            buyProduct(account, id, units, units*price)
             setBought(true)
             setTimeout(() => setOpenModal(false), 2000)
         } else {
@@ -72,9 +77,15 @@ export function ProductCard({name, price, buyable}){
                 </div>
                 <div className="w-full flex flex-row justify-between items-center">
                     <div><span className='underline'>Total:</span> {price * units} CMP</div>
-                    <Button className='p-1' onClick={formHandler}>Buy</Button>
+                    {account === NO_WALLET && <Button className='p-1' disabled={true}>Buy</Button>}
+                    {account !== NO_WALLET && 
+                        <Button className='p-1' onClick={account === CONNECT_WALLET ? connectWallet : formHandler}>
+                            {account === CONNECT_WALLET ? CONNECT_WALLET : 'Buy'}
+                        </Button>
+                    }
                 </div>
-                {bought && <span className='bg-cyan-950 p-3 rounded-lg m-5 text-lg font-bold'>Bought! But we still working on it</span>}
+                {bought && <span className='bg-cyan-950 p-1 rounded-lg'>Bought! Thanks for purchasing!</span>}
+                {account === NO_WALLET && <span className='bg-cyan-950 p-1 rounded-lg text-red-600'><Link href={'/dashboard'}>You need a EVN Wallet for purchasing</Link></span>}
             </div>
             </Modal.Body>
         </Modal>
