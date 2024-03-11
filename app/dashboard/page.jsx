@@ -80,14 +80,26 @@ export default function Page(){
     function formHandlerRegistryCompany(formData) {
         registryCompany(account, formData.get("name"))
             .then(() => {
-                location.reload()
+                fetchCompanyData(account)
+                .then(c => {
+                    setCompany(c)
+                    c && fetchLastInvoices(account)
+                        .then(i => setInvoices(i))
+                })
             })
     }
 
     function formHandlerUploadProduct(formData) {
         uploadProduct(account, formData.get("name"), formData.get("price"))
             .then(() => {
-                location.reload()
+                document.getElementsByName("name")[0].value = '';
+                document.getElementsByName("price")[0].value = '';
+                fetchCompanyData(account)
+                    .then(c => {
+                    setCompany(c)
+                    c && fetchLastInvoices(account)
+                    .then(i => setInvoices(i))
+                })
             })
     }
 

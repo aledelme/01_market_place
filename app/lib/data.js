@@ -1,14 +1,15 @@
 'use server'
-import db from '../../temporal_db/db.json'
 import fs from 'fs'
 
-const DB = './temporal_db/db.json'
+const DB = './app/temporal_db/db.json'
 
 export async function fetchCompanyData (address){
+    const db = getDB()
     return db[address]
 }
 
 export async function fetchLastInvoices (address){
+    const db = getDB()
     const {products, invoices} = db[address]
     if(!invoices) return null
     return invoices
@@ -18,6 +19,7 @@ export async function fetchLastInvoices (address){
 }
 
 export async function fetchAllProducts (search){
+    const db = getDB()
     let products = []
     for (const [, data] of Object.entries(db)) {
       products = products.concat(data.products)
@@ -32,12 +34,28 @@ export async function fetchAllProducts (search){
 }
 
 export async function registryCompany(address, name){
+    const db = getDB()
     db[address] = {name: name, products: [], invoices: []}
     fs.writeFileSync(DB, JSON.stringify(db, undefined, 4))
 }
 
 export async function uploadProduct(company, name, price){
+    const db = getDB()
     db[company].products.push({"name": name, "price": price})
 
     fs.writeFileSync(DB, JSON.stringify(db, undefined, 4))
+}
+
+
+
+
+function getDB(){
+    if (!fs.existsSync(DB)) {
+        if (!fs.existsSync('./app/temporal_db')){
+            fs.mkdirSync('./app/temporal_db')
+        }
+        fs.writeFileSync(DB,'{}')
+    }
+    const db = JSON.parse(fs.readFileSync(DB))
+    return db
 }
