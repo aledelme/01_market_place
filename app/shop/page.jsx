@@ -43,6 +43,7 @@ export default function Page(){
                             name={p.name}
                             price={p.price}
                             buyable={true}
+                            company={p.company_address}
                         ></ProductCard>
                     })
                 }

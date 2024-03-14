@@ -5,9 +5,11 @@ import { Button, Label, Modal, TextInput } from 'flowbite-react';
 import { useContext, useState } from 'react';
 import { WalletContext, CONNECT_WALLET, NO_WALLET } from './WalletProvider';
 import Link from 'next/link';
+import { Contract, ethers } from 'ethers';
+import { abi, contractAddress } from '@/app/lib/MarketCoin';
 
-export function ProductCard({id, name, price, buyable}){
-    const { account, connectWallet } = useContext(WalletContext)
+export function ProductCard({id, name, price, buyable, company}){
+    const { account, connectWallet, checkBalance } = useContext(WalletContext)
     const [openModal, setOpenModal] = useState(false);
     const [units, setUnits] = useState(1);
     const [validUnits, setValidUnits] = useState(true)
@@ -22,13 +24,22 @@ export function ProductCard({id, name, price, buyable}){
         setOpenModal(true)
         setBought(false)
         setUnits(1);
+        setValidUnits(true)
     }
 
-    function formHandler(){
+    async function formHandler(){
         if (units > 0){
-            buyProduct(account, id, units, units*price)
-            setBought(true)
-            setTimeout(() => setOpenModal(false), 2000)
+            const provider = new ethers.BrowserProvider(window.ethereum)
+            const signer = await provider.getSigner();
+            const marketCoin = new Contract(contractAddress, abi, signer)
+            try {
+                const airDrop = await marketCoin.transfer(company, ethers.parseEther(String(units*price)))
+                await airDrop.wait()
+                await buyProduct(account, id, units, units*price)
+                setBought(true)
+                setTimeout(() => setOpenModal(false), 2000)
+                checkBalance()
+            } catch(e){} //User denied transaction signature
         } else {
             setValidUnits(false)
         }
@@ -36,7 +47,7 @@ export function ProductCard({id, name, price, buyable}){
 
     return (
         <>
-        <div className={`border p-2 bg-cyan-900 w-min transition duration-300 ease-in-out hover:scale-110 
+        <div className={`border p-2 bg-cyan-900 h-min w-min transition duration-300 ease-in-out hover:scale-110
             ${buyable && 'hover:cursor-pointer'}`} 
             onClick={buyable && onOpenModal}>
             <div className="border relative aspect-square h-40 bg-cyan-950">
@@ -61,17 +72,22 @@ export function ProductCard({id, name, price, buyable}){
                         type='number'
                         id="units"
                         min={1}
+                        step={1}
                         value={units}
                         onChange={(event) => {
-                            event.target.value < 0 ? setUnits(1) : setUnits(event.target.value)
-                            setValidUnits(true)
+                            if (event.target.value < 0){
+                                setUnits(1)
+                                setValidUnits(true)
+                            } else if (/^\d*$/.test(event.target.value)) {
+                                setUnits(event.target.value)
+                                setValidUnits(true)
+                            }
                         }}
                         color={!validUnits && 'failure'}
                         className='text-black'
                         helperText={
-                            !validUnits && <>
+                            !validUnits &&
                              <span className="font-medium">No valid number. Min 1</span>
-                            </>
                           }
                     />
                 </div>
@@ -85,7 +101,7 @@ export function ProductCard({id, name, price, buyable}){
                     }
                 </div>
                 {bought && <span className='bg-cyan-950 p-1 rounded-lg'>Bought! Thanks for purchasing!</span>}
-                {account === NO_WALLET && <span className='bg-cyan-950 p-1 rounded-lg text-red-600'><Link href={'/dashboard'}>You need a EVN Wallet for purchasing</Link></span>}
+                {account === NO_WALLET && <span className='bg-cyan-950 p-1 rounded-lg text-red-600'><Link href={'/dashboard'}>You need a EVM Wallet for purchasing</Link></span>}
             </div>
             </Modal.Body>
         </Modal>

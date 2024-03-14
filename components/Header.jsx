@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HomeLogo } from "./HomeLogo";
 import { WalletButton } from "./WalletButton";
+import { BalanceCMP } from "./BalanceCMP";
 
 export function Header(){
     return (
@@ -11,6 +12,7 @@ export function Header(){
                 <li className="underline-animation"><Link href={"/dashboard"}>Selling Dashboard</Link></li>
                 <li className="underline-animation"><Link href={"/about"}>About</Link></li>
             </ul>
+            <BalanceCMP></BalanceCMP>
             <WalletButton></WalletButton>
         </div>
     )

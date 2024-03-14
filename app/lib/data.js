@@ -47,6 +47,7 @@ export async function fetchAllProducts (search){
         SELECT
             product_id,
             product_name AS name,
+            Company_address,
             price
         FROM products WHERE product_name ILIKE ${`%${search ? search : ''}%`}`
 

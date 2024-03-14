@@ -114,7 +114,7 @@ export default function Page(){
             <div className="grid grid-cols-10 gap-x-3">
                 <h3 className="col-span-7 text-2xl">Your showcase</h3>
                 <h3 className="col-span-3 text-2xl">Last invoices</h3>
-                <div className="col-span-7 border p-3 gap-y-5 grid justify-items-center grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                <div className="col-span-7 border p-3 gap-y-5 grid justify-items-center content-start grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                     {company.products.map((p, index) => <ProductCard
                         key={index}
                         name={p.name} 

@@ -1,5 +1,7 @@
 'use client'
 
+import { abi, contractAddress } from "@/app/lib/MarketCoin";
+import { ethers, Contract } from "ethers";
 import { createContext, useEffect, useState } from "react";
 
 export const CONNECT_WALLET = "Connect Wallet"
@@ -9,11 +11,12 @@ export const WalletContext = createContext()
 
 export function WalletProvider({children}){
     // const [provider, setProvider] = useState(null)
-    const [account, setAccount] = useState(CONNECT_WALLET)
+    const [ account, setAccount ] = useState(CONNECT_WALLET)
+    const [ balance, setBalance ] = useState(0n)
 
-    const setAccounts = (accounts) => {
+    const setAccounts = async (accounts) => {
         if (accounts.length){
-            setAccount(accounts[0])
+            setAccount(accounts[0])            
         } else {
             setAccount(CONNECT_WALLET)
         }
@@ -26,6 +29,15 @@ export function WalletProvider({children}){
         })
     }
 
+    const checkBalance = async () => {
+        const provider = new ethers.BrowserProvider(window.ethereum)
+        const signer = await provider.getSigner();
+        const marketCoin = new Contract(contractAddress, abi, signer)
+
+        const amount = await marketCoin.balanceOf(account)
+        setBalance(amount)
+    }
+
     useEffect(() => {
         if (window.ethereum == null) {
             setAccount(NO_WALLET)
@@ -36,8 +48,13 @@ export function WalletProvider({children}){
         }
     }, [])
 
+    useEffect(() => {
+        if (ethers.isAddress(account))
+            checkBalance()
+    }, [account])
+
     return (
-        <WalletContext.Provider value={{account, connectWallet}}>
+        <WalletContext.Provider value={{account, connectWallet, balance, checkBalance}}>
             {children}
         </WalletContext.Provider>
     )
