@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
  * @title Token ERC20 MarketCoin (CMP)
  * @author Alejandro Del Medico
  * @notice Token ERC20 para realizar intercambios de compra y venta en la plataforma Crypto Market Place
+ * Deployment date: 2024-03-19 20:36
  */
 contract MarketCoin is ERC20 {
 
