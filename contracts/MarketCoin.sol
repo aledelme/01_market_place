@@ -4,6 +4,11 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
+/**
+ * @title Token ERC20 MarketCoin (CMP)
+ * @author Alejandro Del Medico
+ * @notice Token ERC20 para realizar intercambios de compra y venta en la plataforma Crypto Market Place
+ */
 contract MarketCoin is ERC20 {
 
     mapping(address => bool) private _minted;
