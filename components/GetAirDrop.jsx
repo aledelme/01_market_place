@@ -6,11 +6,15 @@ import { WalletContext } from "./WalletProvider"
 import { Contract, ethers } from "ethers"
 import { abi, contractAddress } from "@/app/lib/MarketCoin"
 export function GetAirDrop(){
-    const { account } = useContext(WalletContext)
+    const { account, chainId } = useContext(WalletContext)
     const [ hasMinted, setHasMinted] = useState(true)
-
     useEffect(() => {
         if (!ethers.isAddress(account)) return
+        if (chainId !== process.env.NEXT_PUBLIC_SEPOLIA_ID) {
+            setHasMinted(true)
+            return
+        }
+
         const provider = new ethers.BrowserProvider(window.ethereum)
         provider.getSigner()
             .then((signer) => {
@@ -20,7 +24,7 @@ export function GetAirDrop(){
                         setHasMinted(minted)
                     })
             })
-    }, [account])
+    }, [account, chainId])
 
     const getAirDrop = async() => {
         const provider = new ethers.BrowserProvider(window.ethereum)

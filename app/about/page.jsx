@@ -34,7 +34,7 @@ export default function Page(){
                     You can find the code of this website on this <MiniLink href="https://github.com/aledelme/01_market_place/">GitHub Repository</MiniLink>.
                 </p>
                 <p>
-                    I am temporarily using a PostgreSQL database to store the data. However, the idea is to create a smart contract on the Goerli testnet to store the data and for purchase and sale transactions to be carried out with its own ERC20 token.
+                    I am temporarily using a PostgreSQL database to store the data. However, the idea is to create a smart contract on the Sepolia testnet to store the data and for purchase and sale transactions to be carried out with its own ERC20 token.
                 </p>
                 <p>
                     As for me, I seek to be part of a multidisciplinary team with which I can learn and at the same time contribute with my personal knowledge of the Blockchain world.

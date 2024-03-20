@@ -1,4 +1,4 @@
-export const contractAddress = "0x76Ef35738900F4093B899E433715C82e5A90a333"
+export const contractAddress = process.env.NEXT_PUBLIC_ERC20_ADDRESS
 export const abi = [
     {
       "inputs": [],
